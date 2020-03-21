@@ -1,0 +1,3 @@
+[submodule "internal/janus/janus"]
+	path = internal/janus/janus
+	url = https://github.com/ricecake/janus.git

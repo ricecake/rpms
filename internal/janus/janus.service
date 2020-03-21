@@ -1,0 +1,12 @@
+[Unit]
+Description=Janus gateway system
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/janus server
+User=janus
+Group=janus
+
+[Install]
+WantedBy=multi-user.target
