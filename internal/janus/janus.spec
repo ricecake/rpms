@@ -1,6 +1,6 @@
 Summary:    Janus Openid login system
 Name:       janus
-Version:    0.2
+Version:    0.4
 Release:    1
 Buildroot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 License:    MIT
