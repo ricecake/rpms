@@ -1,6 +1,6 @@
 Summary:    Janus Openid login system
 Name:       janus
-Version:    0.5
+Version:    0.9
 Release:    1
 Buildroot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 License:    MIT
@@ -28,19 +28,15 @@ janus is an openid login system
 %prep
 %setup -q -T -D -n %{name}
 %build
-make package
+make release
 
 %install
 rm -rf ${RPM_BUILD_ROOT}
 mkdir -p ${RPM_BUILD_ROOT}/usr/bin
 mkdir -p ${RPM_BUILD_ROOT}/etc/janus/
 mkdir -p ${RPM_BUILD_ROOT}/etc/systemd/system/
-mkdir -p ${RPM_BUILD_ROOT}/srv/janus/
-install -m700 _package/janus/bin/janus ${RPM_BUILD_ROOT}/usr/bin/janus
+install -m700 bin/janus ${RPM_BUILD_ROOT}/usr/bin/janus
 install -m600 janus.service ${RPM_BUILD_ROOT}/etc/systemd/system/
-cp -R _package/janus/assets ${RPM_BUILD_ROOT}/srv/janus/
-find ${RPM_BUILD_ROOT}/srv/janus/ -type d -exec chmod 700 '{}' \;
-find ${RPM_BUILD_ROOT}/srv/janus/ -type f -exec chmod 600 '{}' \;
 
 %define STATE_DIR %{_localstatedir}/lib/rpm-state/janus
 %define SUPPORTED_DISTRO %{STATE_DIR}/supported
@@ -59,8 +55,6 @@ rm -rf ${RPM_BUILD_ROOT}
 %attr(0755,root,janus) /usr/bin/janus
 %attr(0770,root,janus) /etc/janus/
 %attr(0644,root,janus) /etc/systemd/system/janus.service
-/srv/janus
-
 
 %changelog
 * Fri Mar 20 2020 Sebastian Green-Husted <geoffcake@gmail.com> 0.1-1

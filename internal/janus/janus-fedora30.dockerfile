@@ -1,5 +1,5 @@
 FROM fedora:30
-RUN dnf install -y make wget redhat-rpm-config rpm-build systemd-rpm-macros git gcc nodejs
+RUN dnf install -y make wget redhat-rpm-config rpm-build systemd-rpm-macros git gcc
 
 ENV RPMBUILDPATH /root/rpmbuild
 ENV GOROOT /root/bin/go
@@ -9,10 +9,13 @@ RUN mkdir -p ${GOROOT}
 RUN mkdir -p ${GOPATH}/src
 
 WORKDIR /root/bin
-RUN wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
-RUN tar zxvf go1.13.3.linux-amd64.tar.gz
+RUN wget https://dl.google.com/go/go1.16.2.linux-amd64.tar.gz
+RUN tar zxvf go1.16.2.linux-amd64.tar.gz
 ENV PATH=${GOROOT}/bin:$PATH
 
+RUN wget https://nodejs.org/dist/v16.13.0/node-v16.13.0-linux-x64.tar.xz
+RUN tar xvf node-v16.13.0-linux-x64.tar.xz
+ENV PATH=/root/bin/node-v16.13.0-linux-x64/bin:$PATH
 
 RUN mkdir -p ${RPMBUILDPATH}/SPECS
 RUN mkdir -p ${RPMBUILDPATH}/SOURCES
